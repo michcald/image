@@ -7,7 +7,7 @@ namespace Michcald\Image\Transformer;
  * 
  * @author Michael Caldera <michcald@gmail.com>
  */
-class ResizeToHeight extends Michcald\Image\Transformer
+class ResizeToHeight extends \Michcald\Image\Transformer
 {
     private $height;
     
@@ -27,7 +27,7 @@ class ResizeToHeight extends Michcald\Image\Transformer
         return $this;
     }
     
-    public function transform(Michcald\Image $image)
+    public function transform(\Michcald\Image $image)
     {
         $ratio = $image->getHeight() / $image->getWidth();
 
@@ -36,7 +36,7 @@ class ResizeToHeight extends Michcald\Image\Transformer
         $newImage = imagecreatetruecolor($newWidth, $this->height);
 
         imagealphablending($newImage, false);
-        imagesavealpha($new, true);
+        imagesavealpha($newImage, true);
 
         if($this->resample) {
             imagecopyresampled(
@@ -51,7 +51,7 @@ class ResizeToHeight extends Michcald\Image\Transformer
         } else {
             imagecopyresized(
                 $newImage, 
-                $this->getResource(), 
+                $image->getResource(), 
                 0, 0, 0, 0, 
                 $newWidth, 
                 $this->height, 

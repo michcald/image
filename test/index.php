@@ -7,6 +7,7 @@ if(!extension_loaded('gd')) {
 require '../vendor/autoload.php';
 
 use Michcald\Image\Filter;
+use Michcald\Image\Transformer;
 
 $img = new Michcald\Image('images/ramsey.jpg');
 
@@ -34,9 +35,27 @@ $bright->setLevel(100);
 //$img->applyFilter(new Michcald\Image\Filter\Emboss());
 //$img->applyFilter(new Michcald\Image\Filter\EdgeDetect());
 //$img->applyFilter(new Michcald\Image\Filter\Contrast());
-$img->applyFilter($colorize);
-$img->applyFilter($pixelate);
-$img->applyFilter($bright);
+//$img->applyFilter($colorize);
+//$img->applyFilter($pixelate);
+//$img->applyFilter($bright);
+
+$crop = new Transformer\Crop();
+$crop->setX1(50)
+    ->setY1(10)
+    ->setX2(75)
+    ->setY2(100);
+//$img->applyTransformer($crop);
+
+$resize = new Transformer\Resize();
+$resize->setHeight(600)
+    ->setWidth(600)
+    ->setResample(true);
+//$img->applyTransformer($resize);
+
+$adapt = new Transformer\Adapt();
+$adapt->setWidth(200)
+    ->setHeight(200);
+$img->applyTransformer($adapt);
 
 header('Content-Type: image/jpg');
 

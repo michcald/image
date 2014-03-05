@@ -7,7 +7,7 @@ namespace Michcald\Image\Transformer;
  * 
  * @author Michael Caldera <michcald@gmail.com>
  */
-class ResizeToWidth extends Michcald\Image\Transformer
+class ResizeToWidth extends \Michcald\Image\Transformer
 {
     private $width;
     

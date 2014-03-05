@@ -5,7 +5,7 @@ namespace Michcald\Image\Transformer;
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class Crop extends Michcald\Image\Transformer
+class Crop extends \Michcald\Image\Transformer
 {
     private $x1;
     
@@ -14,10 +14,6 @@ class Crop extends Michcald\Image\Transformer
     private $x2;
     
     private $y2;
-    
-    private $width;
-    
-    private $height;
     
     private $resample = false;
     
@@ -45,20 +41,6 @@ class Crop extends Michcald\Image\Transformer
     public function setY2($y2)
     {
         $this->y2 = (int)$y2;
-        
-        return $this;
-    }
-    
-    public function setHeight($height)
-    {
-        $this->height = (int)$height;
-        
-        return $this;
-    }
-    
-    public function setWidth($width)
-    {
-        $this->width = (int)$width;
         
         return $this;
     }

@@ -76,6 +76,13 @@ class Image
         return $this;
     }
     
+    public function applyTransformer(Image\Transformer $transformer)
+    {
+        $transformer->transform($this);
+        
+        return $this;
+    }
+    
     public function saveAsJpeg($filename, $quality = 85)
     {
         if($quality == null) {

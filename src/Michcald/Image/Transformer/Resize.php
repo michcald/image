@@ -1,16 +1,37 @@
 <?php
 
-namespace Michcald;
+namespace Michcald\Image\Transformer;
 
-class ResizeTransformer extends AbstractTransformer
+class Resize extends \Michcald\Image\Transformer
 {
     private $width;
     
     private $height;
     
-    private $resample = true;
+    private $resample = false;
     
-    public function transform(Michcald\Image $image)
+    public function setWidth($width)
+    {
+        $this->width = (int)$width;
+        
+        return $this;
+    }
+    
+    public function setHeight($height)
+    {
+        $this->height = $height;
+        
+        return $this;
+    }
+    
+    public function setResample($resample)
+    {
+        $this->resample = (bool)$resample;
+        
+        return $this;
+    }
+    
+    public function transform(\Michcald\Image $image)
     {
         $newImage = imagecreatetruecolor($this->width, $this->height);
 
