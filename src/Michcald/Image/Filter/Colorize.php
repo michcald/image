@@ -2,10 +2,12 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class ColorizeFilter extends AbstractFilter
+class Colorize extends Filter
 {
     private $red;
     

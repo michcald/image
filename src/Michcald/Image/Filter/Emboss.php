@@ -2,10 +2,12 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class EmbossFilter extends AbstractFilter
+class Emboss extends Filter
 {
     public function filter(\Michcald\Image $image)
     {

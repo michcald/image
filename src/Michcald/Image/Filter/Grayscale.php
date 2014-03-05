@@ -2,12 +2,14 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * Convert an image in grayscale
  * 
  * @author Michael Caldera <michcald@gmail.com>
  */
-class GrayscaleFilter extends AbstractFilter
+class Grayscale extends Filter
 {
     public function filter(\Michcald\Image $image)
     {

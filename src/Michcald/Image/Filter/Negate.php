@@ -2,12 +2,14 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * Invert image colors
  * 
  * @author Michael Caldera <michcald@gmail.com>
  */
-class NegateFilter extends AbstractFilter
+class Negate extends Filter
 {
     public function filter(\Michcald\Image $image)
     {

@@ -2,10 +2,12 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class EdgeDetectFilter extends AbstractFilter
+class EdgeDetect extends Filter
 {
     public function filter(\Michcald\Image $image)
     {

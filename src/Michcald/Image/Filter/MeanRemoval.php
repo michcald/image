@@ -2,10 +2,12 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class MeanRemovalFilter extends AbstractFilter
+class MeanRemoval extends Filter
 {
     private $level = 1;
     

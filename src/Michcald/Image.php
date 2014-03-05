@@ -69,7 +69,7 @@ class Image
         return $this->type;
     }
     
-    public function applyFilter(Image\Filter\AbstractFilter $filter)
+    public function applyFilter(Image\Filter $filter)
     {
         $filter->filter($this);
         

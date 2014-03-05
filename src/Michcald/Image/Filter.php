@@ -1,8 +1,8 @@
 <?php
 
-namespace Michcald\Image\Filter;
+namespace Michcald\Image;
 
-abstract class AbstractFilter
+abstract class Filter
 {
     abstract public function filter(\Michcald\Image $image);
 }

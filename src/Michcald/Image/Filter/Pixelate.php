@@ -2,10 +2,12 @@
 
 namespace Michcald\Image\Filter;
 
+use Michcald\Image\Filter;
+
 /**
  * @author Michael Caldera <michcald@gmail.com>
  */
-class PixelateFilter extends AbstractFilter
+class Pixelate extends Filter
 {
     private $blockSize = 2;
     
