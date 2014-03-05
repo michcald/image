@@ -2,11 +2,6 @@
 
 namespace Michcald;
 
-// Require GD library
-if(!extension_loaded('gd')) {
-    throw new \Exception('Required extension GD is not loaded!');
-}
-
 /**
  * Michcald\Image
  * 
@@ -14,30 +9,36 @@ if(!extension_loaded('gd')) {
  */
 class Image
 {
-    private $src = null;
+    const TYPE_JPEG = 'image/jpeg';
+    
+    const TYPE_JPG = 'image/jpg';
+    
+    const TYPE_GIF = 'image/gif';
+    
+    const TYPE_PNG = 'image/png';
+    
+    private $type;
     
     private $image = null;
     
-    private $filters = array();
-    
     public function __construct($src)
     {
-        $this->src = $src;
         $info = getimagesize($src);
         
-        switch($info['mime'])
-        {
+        $this->type = $info['mime'];
+        
+        switch($this->type) {
             case 'image/gif':
                 $this->image = imagecreatefromgif($src);
-		break;
+                break;
             case 'image/jpeg':
                 $this->image = imagecreatefromjpeg($src);
-		break;
+                break;
             case 'image/png':
                 $this->image = imagecreatefrompng($src);
-		break;
+                break;
             default:
-                throw new Exception('Mein_Image::__construct() Unsupported image type');
+                throw new \Exception('Unsupported image type');
         }
     }
     
@@ -65,8 +66,7 @@ class Image
     
     public function getType()
     {
-        $info = getimagesize($this->src);
-        return $info['mime'];
+        return $this->type;
     }
     
     public function applyFilter(Image\Filter\AbstractFilter $filter)
@@ -75,49 +75,36 @@ class Image
         
         return $this;
     }
-
-    public function save($filename, $type = 'image/jpeg', $quality = null)
+    
+    public function saveAsJpeg($filename, $quality = 85)
     {
-        switch($type)
-        {
-            case 'image/gif':
-                imagegif($this->image, $filename);
-		break;
-            case 'image/jpg':
-            case 'image/jpeg':
-                if($quality == null) {
-                    $quality = 85;
-                } else if($quality < 0) {
-                    $quality = 0;
-                } else if($quality > 100) {
-                    $quality = 100;
-                }
-		imagejpeg($this->image, $filename, $quality);
-		break;
-            case 'image/png':
-                if($quality == null) {
-                    $quality = 9;
-                } else if($quality > 9) {
-                    $quality = 9;
-                } else if($quality < 1) {
-                    $quality = 0;
-                }
-		imagepng($this->image, $filename, $quality);
-                break;
-            default:
-                // Unsupported image type
-                throw new Exception('Unsupported image type');
-		#return false;
-                break;
+        if($quality == null) {
+            $quality = 85;
+        } else if($quality < 0) {
+            $quality = 0;
+        } else if($quality > 100) {
+            $quality = 100;
         }
         
-        return $this;
+        imagejpeg($this->image, $filename, $quality);
     }
-
     
-
-
+    public function saveAsGif($filename)
+    {
+        imagegif($this->image, $filename);
+    }
     
-
+    public function saveAsPng($filename, $quality = 85)
+    {
+        $quality = (int)($quality/10);
+        
+        if($quality > 9) {
+            $quality = 9;
+        } else if($quality < 1) {
+            $quality = 0;
+        }
+        
+        imagepng($this->image, $filename, $quality);
+    }
     
 }

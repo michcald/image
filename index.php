@@ -2,6 +2,11 @@
 
 require 'vendor/autoload.php';
 
+// Require GD library
+if(!extension_loaded('gd')) {
+    throw new \Exception('Required extension GD is not loaded!');
+}
+
 $img = new Michcald\Image('ramsey.jpg');
 
 $blur = new Michcald\Image\Filter\BlurFilter();
