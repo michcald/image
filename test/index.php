@@ -53,9 +53,17 @@ $resize->setHeight(600)
 //$img->applyTransformer($resize);
 
 $adapt = new Transformer\Adapt();
-$adapt->setWidth(200)
+$adapt->setWidth(250)
     ->setHeight(200);
-$img->applyTransformer($adapt);
+//$img->applyTransformer($adapt);
+
+$resizeToHeight = new Transformer\ResizeToHeight();
+$resizeToHeight->setHeight(600);
+//$img->applyTransformer($resizeToHeight);
+
+$resizeToWidth = new Transformer\ResizeToWidth();
+$resizeToWidth->setWidth(100);
+//$img->applyTransformer($resizeToWidth);
 
 header('Content-Type: image/jpg');
 

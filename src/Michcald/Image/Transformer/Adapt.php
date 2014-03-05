@@ -11,7 +11,7 @@ use Michcald\Image\Transformer\Crop;
  * 
  * @author Michael Caldera <michcald@gmail.com>
  */
-class Adapt extends Michcald\Image\Transformer
+class Adapt extends \Michcald\Image\Transformer
 {
     private $width;
     
@@ -40,10 +40,10 @@ class Adapt extends Michcald\Image\Transformer
         $width = $this->width;
         $height = $this->height;
         
-        if(($width < $height && $this->getWidth() < $this->getHeight()) || 
-            ($width > $height && $this->getWidth() > $this->getHeight())) {
+        if(($width < $height && $image->getWidth() < $image->getHeight()) || 
+            ($width > $height && $image->getWidth() > $image->getHeight())) {
             
-            if (abs($this->getWidth()-$width) > abs($this->getHeight()-$height)) {
+            if (abs($image->getWidth()-$width) > abs($image->getHeight()-$height)) {
                 $resizeToHeightTransformer->setHeight($height)
                     ->transform($image);
             } else {
@@ -68,40 +68,40 @@ class Adapt extends Michcald\Image\Transformer
             $y1 = ($image->getHeight() - $height) / 2;
             
             $cropTransformer->setX1(0)
-                ->setX2($this->y1)
-                ->setY1($width)
-                ->setY2($this->y1 + $height)
+                ->setY1($y1)
+                ->setX2($width)
+                ->setY2($y1 + $height)
                 ->transform($image);
             
-        } else if($this->getWidth() == $width && $this->getHeight() < $height) {
+        } else if($image->getWidth() == $width && $image->getHeight() < $height) {
             $resizeToHeightTransformer->setHeight($height)
                 ->transform($image);
             
             $x1 = ($image->getWidth() - $width) / 2;
             
-            $cropTransformer->setX1($this->x1)
-                ->setX2(0)
-                ->setY1($this->x1 + $width)
+            $cropTransformer->setX1($x1)
+                ->setY1(0)
+                ->setX2($x1 + $width)
                 ->setY2($height)
                 ->transform($image);
             
         } else {
-            if($this->getHeight() == $height) {
-                $this->x1 = ($image->getWidth() - $width) / 2;
+            if($image->getHeight() == $height) {
+                $x1 = ($image->getWidth() - $width) / 2;
                 
-                $cropTransformer->setX1($this->x1)
-                    ->setX2(0)
-                    ->setY1($this->x1 + $width)
+                $cropTransformer->setX1($x1)
+                    ->setY1(0)
+                    ->setX2($x1 + $width)
                     ->setY2($height)
                     ->transform($image);
                 
             } else {
-                $this->y1 = ($image->getHeight() - $height) / 2;
+                $y1 = ($image->getHeight() - $height) / 2;
                 
                 $cropTransformer->setX1(0)
-                    ->setX2($this->y1)
-                    ->setY1($width)
-                    ->setY2($this->y1 + $height)
+                    ->setY1($y1)
+                    ->setX2($width)
+                    ->setY2($y1 + $height)
                     ->transform($image);
             }
         }
